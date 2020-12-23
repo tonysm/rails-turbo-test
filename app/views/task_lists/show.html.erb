@@ -5,5 +5,13 @@
   <%= @task_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_task_list_path(@task_list) %> |
-<%= link_to 'Back', task_lists_path %>
+<p>
+  <%= link_to 'Edit', edit_task_list_path(@task_list) %> |
+  <%= link_to 'Back', task_lists_path %>
+</p>
+
+<div id="tasks">
+  <%= render @task_list.tasks %>
+</div>
+
+<%= link_to "New task", new_task_list_tasks_path(@task_list) %>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :task_lists
+  resources :task_lists do
+    resource :tasks
+  end
   resources :rooms do
     resources :messages
   end
