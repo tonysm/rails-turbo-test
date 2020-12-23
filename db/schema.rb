@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_015157) do
+ActiveRecord::Schema.define(version: 2020_12_23_022049) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "room_id", null: false
@@ -26,5 +26,20 @@ ActiveRecord::Schema.define(version: 2020_12_23_015157) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "task_lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "task_list_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_list_id"], name: "index_tasks_on_task_list_id"
+  end
+
   add_foreign_key "messages", "rooms"
+  add_foreign_key "tasks", "task_lists"
 end
