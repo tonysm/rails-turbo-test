@@ -1,6 +1,8 @@
 <h1>Editing Task List</h1>
 
-<%= render 'form', task_list: @task_list %>
+<%= turbo_frame_tag "task_list" do %>
+    <%= render 'form', task_list: @task_list %>
+<% end %>
 
 <%= link_to 'Show', @task_list %> |
 <%= link_to 'Back', task_lists_path %>

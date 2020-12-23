@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task_list, only: %i[ new create ]
+    before_action :set_task_list, only: %i[ new create destroy ]
 
     def new
         @task = @task_list.tasks.new
@@ -9,6 +9,17 @@ class TasksController < ApplicationController
         @task = @task_list.tasks.create!(task_params)
 
         respond_to do |format|
+            format.turbo_stream
+            format.html { redirect_to @task_list }
+        end
+    end
+
+    def destroy
+        task = @task_list.tasks().find params[:task_id]
+        task.destroy
+
+        respond_to do |format|
+            format.turbo_stream
             format.html { redirect_to @task_list }
         end
     end
